@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segunda Pagina</title>
+    <style>
+        :root {
+            --cor-fundo: #eef4ff;
+            --cor-superficie: #ffffff;
+            --cor-texto: #1a1a1a;
+            --cor-primaria: #0056b3;
+            --cor-foco: #ffbf47;
+            --sombra: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--cor-texto);
+            background: linear-gradient(180deg, #dfe9ff 0%, var(--cor-fundo) 40%, #f7fbff 100%);
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        main {
+            background: var(--cor-superficie);
+            border-radius: 12px;
+            box-shadow: var(--sombra);
+            padding: 24px;
+        }
+
+        a {
+            color: var(--cor-primaria);
+            font-weight: bold;
+        }
+
+        a:focus {
+            outline: 4px solid var(--cor-foco);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Segunda Pagina</h1>
+        <p>Voce abriu a segunda pagina com sucesso ao clicar no botao da pagina inicial.</p>
+        <a href="index.html">Voltar para a pagina inicial</a>
+    </main>
+</body>
+</html>

@@ -1,74 +1,194 @@
-<!doctype html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Computação em Nuvem</title>
-    <style>
-      :root {
-        color-scheme: light;
-      }
-      body {
-        font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-        line-height: 1.6;
-        margin: 0;
-        padding: 32px 16px;
-        background: #f7f7fb;
-        color: #111827;
-      }
-      main {
-        max-width: 820px;
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de Desenho Universal</title>
+</head>
+
+<style>
+    /* 1. Cores e Contraste: Usando variáveis para fácil manutenção */
+    :root {
+        --cor-fundo: #eef4ff;
+        --cor-superficie: #ffffff;
+        --cor-texto: #1a1a1a; /* Alto contraste (não é preto puro para evitar fadiga) */
+        --cor-primaria: #0056b3; /* Azul com bom contraste para links */
+        --cor-secundaria: #0b8457;
+        --cor-destaque: #e9f1ff;
+        --cor-foco: #ffbf47; /* Cor de destaque para navegação via teclado */
+        --sombra: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    body {
+        font-family: Arial, sans-serif; /* Fontes sem serifa são mais fáceis de ler na tela */
+        line-height: 1.6; /* Espaçamento entre linhas para evitar "blocos de texto" densos */
+        color: var(--cor-texto);
+        background: linear-gradient(180deg, #dfe9ff 0%, var(--cor-fundo) 40%, #f7fbff 100%);
+        max-width: 980px;
         margin: 0 auto;
-        background: white;
-        border: 1px solid #e5e7eb;
-        border-radius: 12px;
         padding: 24px;
-        box-shadow: 0 6px 20px rgba(17, 24, 39, 0.06);
-      }
-      h1 {
-        margin: 0 0 12px;
-        font-size: 28px;
-        letter-spacing: -0.02em;
-      }
-      p {
-        margin: 0 0 16px;
-        color: #374151;
-      }
-      ul {
+    }
+
+    /* 2. Tamanho de Fonte Relativo: Permite que o usuário dê zoom sem quebrar o site */
+    h1 { font-size: 2rem; }
+    p { font-size: 1.125rem; }
+
+    /* 3. Indicador de Foco Visível: Crucial para quem usa a tecla TAB */
+    a:focus, button:focus, input:focus {
+        outline: 4px solid var(--cor-foco);
+        outline-offset: 2px;
+    }
+
+    /* 4. Estilização de Links: Nunca use apenas cor para identificar um link */
+    a {
+        color: var(--cor-primaria);
+        text-decoration: underline; /* O sublinhado ajuda daltônicos a ver que é um link */
+        font-weight: bold;
+    }
+
+    header, article, section, footer {
+        background: var(--cor-superficie);
+        border-radius: 12px;
+        box-shadow: var(--sombra);
+        padding: 20px;
+        margin-bottom: 18px;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        gap: 16px;
+        padding: 0;
         margin: 0;
-        padding-left: 20px;
-      }
-      li {
-        margin: 6px 0;
-      }
-      footer {
-        margin-top: 16px;
-        font-size: 12px;
-        color: #6b7280;
-      }
-    </style>
-  </head>
-  <body>
-    <main>
-      <h1>O que é Computação em Nuvem?</h1>
+        flex-wrap: wrap;
+    }
 
-      <p>
-        Computação em nuvem é um modelo em que recursos de tecnologia (como armazenamento, servidores,
-        bancos de dados e aplicações) são oferecidos pela internet, sob demanda. Em vez de manter toda
-        a infraestrutura localmente, você utiliza serviços hospedados em datacenters e paga apenas pelo
-        que usar, com facilidade para aumentar ou reduzir capacidade conforme a necessidade.
-      </p>
+    nav a {
+        display: inline-block;
+        padding: 8px 12px;
+        background: var(--cor-destaque);
+        border-radius: 999px;
+    }
 
-      <h2>Exemplos de serviços em nuvem</h2>
-      <ul>
-        <li>Armazenamento de arquivos (ex.: Google Drive, OneDrive, Dropbox)</li>
-        <li>Hospedagem de sites e aplicações (ex.: Vercel, Netlify)</li>
-        <li>Servidores virtuais (ex.: AWS EC2, Azure Virtual Machines)</li>
-        <li>Bancos de dados gerenciados (ex.: Amazon RDS, Cloud SQL)</li>
-        <li>Backup e recuperação de dados</li>
-      </ul>
+    .hero {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 18px;
+        align-items: center;
+        background: linear-gradient(135deg, #edf4ff 0%, #ffffff 100%);
+        border: 1px solid #d9e7ff;
+    }
 
-      <footer>Arquivo: <code>index.html</code></footer>
+    .hero p {
+        margin-top: 8px;
+    }
+
+    .btn-cta {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 12px 20px;
+        background: var(--cor-secundaria);
+        color: #fff;
+        border-radius: 8px;
+        text-decoration: none;
+    }
+
+    /* 5. Design Responsivo Simplificado */
+    img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+
+    button {
+        padding: 12px 24px;
+        background-color: var(--cor-primaria);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        max-width: 420px;
+        margin: 8px 0 14px;
+        padding: 10px;
+        border: 1px solid #b6c7e8;
+        border-radius: 6px;
+        font-size: 1rem;
+    }
+
+    .skip-link {
+        position: absolute;
+        left: -10000px;
+    }
+
+    .skip-link:focus {
+        left: 16px;
+        top: 16px;
+        background: #fff;
+        padding: 8px 10px;
+        border-radius: 6px;
+    }
+
+    @media (max-width: 720px) {
+        .hero {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<body>
+
+    <a class="skip-link" href="#conteudo-principal">Pular para o conteúdo</a>
+
+    <header id="home" role="banner">
+        <h1>Portal Acessível</h1>
+        <nav aria-label="Menu principal">
+            <ul>
+                <li><a href="#home">Início</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="conteudo-principal">
+        <article class="hero">
+            <div>
+                <h2>Inclusão digital com foco em acessibilidade</h2>
+                <p>Conteúdo introdutório sobre boas práticas de acessibilidade, design inclusivo e uso de HTML semântico para experiências melhores para todas as pessoas.</p>
+                <a class="btn-cta" href="segunda-pagina.html">Abrir segunda página</a>
+            </div>
+            <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=900&q=80" alt="Pessoa utilizando notebook com interface acessível e recursos de tecnologia assistiva.">
+        </article>
+
+        <article id="sobre">
+            <h2>O que é HTML Semântico?</h2>
+            <p>O HTML semântico utiliza tags que descrevem seu significado, como <code>&lt;article&gt;</code>, <code>&lt;section&gt;</code> e <code>&lt;nav&gt;</code>.</p>
+            
+            <figure>
+                <img src="https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&w=1000&q=80" alt="Pessoas com diferentes perfis utilizando dispositivos tecnológicos de forma inclusiva.">
+                <figcaption>Legenda: Representação da tecnologia assistiva no dia a dia.</figcaption>
+            </figure>
+        </article>
+
+        <section id="contato">
+            <h3>Entre em contato</h3>
+            <form>
+                <label for="nome">Nome completo:</label>
+                <input type="text" id="nome" name="nome" required>
+
+                <button type="submit">Enviar Mensagem</button>
+            </form>
+        </section>
     </main>
-  </body>
+
+    <footer>
+        <p>&copy; 2026 - Desenvolvido com foco em inclusão.</p>
+    </footer>
+
+</body>
 </html>
