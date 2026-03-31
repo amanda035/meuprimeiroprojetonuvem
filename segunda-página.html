@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segunda Página</title>
+    <style>
+        :root {
+            --cor-fundo: #eef4ff;
+            --cor-superficie: #ffffff;
+            --cor-texto: #1a1a1a;
+            --cor-primaria: #0056b3;
+            --cor-secundaria: #0b8457;
+            --cor-destaque: #e9f1ff;
+            --cor-foco: #ffbf47;
+            --sombra: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--cor-texto);
+            background: linear-gradient(180deg, #dfe9ff 0%, var(--cor-fundo) 40%, #f7fbff 100%);
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        header, article, footer {
+            background: var(--cor-superficie);
+            border-radius: 12px;
+            box-shadow: var(--sombra);
+            padding: 20px;
+            margin-bottom: 18px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 16px;
+            padding: 0;
+            margin: 0;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            display: inline-block;
+            padding: 8px 12px;
+            background: var(--cor-destaque);
+            border-radius: 999px;
+            color: var(--cor-primaria);
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+        .nav-paginas {
+            margin-top: 14px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-paginas label {
+            font-weight: bold;
+        }
+
+        .nav-paginas select {
+            padding: 9px 10px;
+            border: 1px solid #b6c7e8;
+            border-radius: 6px;
+            font-size: 1rem;
+            background: #fff;
+        }
+
+        a:focus, button:focus, input:focus, select:focus {
+            outline: 4px solid var(--cor-foco);
+            outline-offset: 2px;
+        }
+
+        .busca-wrapper {
+            display: grid;
+            gap: 12px;
+        }
+
+        .campo-busca {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: end;
+        }
+
+        .campo-busca label {
+            font-weight: bold;
+            display: block;
+        }
+
+        .campo-busca input {
+            min-width: 280px;
+            padding: 10px;
+            border: 1px solid #b6c7e8;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .campo-busca button {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            background: var(--cor-primaria);
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .acao-planilha {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .acao-planilha button {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            background: var(--cor-secundaria);
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .input-arquivo-oculto {
+            position: absolute;
+            left: -10000px;
+        }
+
+        .arquivo-selecionado {
+            margin: 0;
+            color: #223a5e;
+            font-size: 0.95rem;
+        }
+
+        .status-busca {
+            min-height: 24px;
+            font-weight: bold;
+            color: #223a5e;
+        }
+
+        .tabela-resultado {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 8px;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .tabela-resultado th,
+        .tabela-resultado td {
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid #dbe7ff;
+        }
+
+        .tabela-resultado th {
+            background: var(--cor-destaque);
+            color: var(--cor-primaria);
+        }
+    </style>
+</head>
+<body>
+    <header role="banner">
+        <h1>Segunda Página</h1>
+        <nav aria-label="Navegação principal">
+            <ul>
+                <li><a href="index.html">Página Inicial</a></li>
+                <li><a href="segunda-página.html">Segunda Página</a></li>
+            </ul>
+        </nav>
+        <div class="nav-paginas">
+            <label for="menu-paginas">Trocar página:</label>
+            <select id="menu-paginas" onchange="if(this.value) window.location.href=this.value;">
+                <option value="index.html">Página Inicial</option>
+                <option value="segunda-página.html" selected>Segunda Página</option>
+            </select>
+        </div>
+    </header>
+
+    <main>
+        <article>
+            <h2>Conteúdo da segunda página</h2>
+            <p>Esta página foi criada com menu suspenso no topo para navegação entre páginas, sem botões de ida e volta.</p>
+        </article>
+
+        <article aria-labelledby="titulo-consulta">
+            <h2 id="titulo-consulta">Consulta de dados pelo arquivo XLSX</h2>
+            <p>Digite nome, CPF, e-mail ou cidade para buscar nos dados da planilha <code>dados-consulta.xlsx</code> (na pasta do projeto).</p>
+
+            <div class="busca-wrapper">
+                <div class="campo-busca">
+                    <div>
+                        <label for="termo-busca">Buscar registro:</label>
+                        <input
+                            id="termo-busca"
+                            type="text"
+                            placeholder="Ex.: Maria, 123.456.789-00, Recife..."
+                            autocomplete="off"
+                        >
+                    </div>
+                    <button id="botao-buscar" type="button">Pesquisar</button>
+                </div>
+
+                <div class="acao-planilha">
+                    <button id="botao-escolher-planilha" type="button">Escolher planilha XLSX</button>
+                    <input
+                        id="input-planilha"
+                        class="input-arquivo-oculto"
+                        type="file"
+                        accept=".xlsx"
+                    >
+                    <p id="nome-planilha" class="arquivo-selecionado">Usando arquivo padrao: dados-consulta.xlsx</p>
+                </div>
+
+                <p id="status-busca" class="status-busca" aria-live="polite"></p>
+
+                <table class="tabela-resultado" aria-label="Resultados da consulta">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>CPF</th>
+                            <th>E-mail</th>
+                            <th>Cidade</th>
+                            <th>Profissão</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultado-busca">
+                        <tr>
+                            <td colspan="5">Nenhuma consulta realizada.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 - Navegação entre páginas com acessibilidade.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script>
+        const CAMINHO_ARQUIVO = "dados-consulta.xlsx";
+        let dadosPlanilha = [];
+        let planilhaSelecionada = null;
+
+        const campoBusca = document.getElementById("termo-busca");
+        const botaoBuscar = document.getElementById("botao-buscar");
+        const statusBusca = document.getElementById("status-busca");
+        const resultadoBusca = document.getElementById("resultado-busca");
+        const botaoEscolherPlanilha = document.getElementById("botao-escolher-planilha");
+        const inputPlanilha = document.getElementById("input-planilha");
+        const nomePlanilha = document.getElementById("nome-planilha");
+
+        function converterPlanilhaParaJson(buffer) {
+            const workbook = XLSX.read(buffer, { type: "array" });
+            const primeiraAba = workbook.SheetNames[0];
+            if (!primeiraAba) {
+                throw new Error("A planilha nao possui abas.");
+            }
+
+            const sheet = workbook.Sheets[primeiraAba];
+            return XLSX.utils.sheet_to_json(sheet, { defval: "" });
+        }
+
+        async function carregarPlanilha() {
+            if (dadosPlanilha.length > 0) return;
+
+            try {
+                statusBusca.textContent = "Carregando dados da planilha...";
+                if (planilhaSelecionada) {
+                    const bufferArquivoSelecionado = await planilhaSelecionada.arrayBuffer();
+                    dadosPlanilha = converterPlanilhaParaJson(bufferArquivoSelecionado);
+                    statusBusca.textContent = `Planilha "${planilhaSelecionada.name}" carregada com sucesso.`;
+                    return;
+                }
+
+                const resposta = await fetch(CAMINHO_ARQUIVO);
+                if (!resposta.ok) throw new Error("Arquivo padrao nao encontrado.");
+
+                const buffer = await resposta.arrayBuffer();
+                dadosPlanilha = converterPlanilhaParaJson(buffer);
+                statusBusca.textContent = "Planilha padrao carregada com sucesso.";
+            } catch (erro) {
+                statusBusca.textContent = "Nao foi possivel ler a planilha. Selecione um arquivo XLSX no botao acima ou coloque 'dados-consulta.xlsx' na pasta do projeto.";
+                dadosPlanilha = [];
+            }
+        }
+
+        function renderizarResultados(registros) {
+            if (!registros.length) {
+                resultadoBusca.innerHTML = '<tr><td colspan="5">Nenhum resultado encontrado.</td></tr>';
+                return;
+            }
+
+            resultadoBusca.innerHTML = registros.map((item) => `
+                <tr>
+                    <td>${item.Nome || ""}</td>
+                    <td>${item.CPF || ""}</td>
+                    <td>${item.Email || ""}</td>
+                    <td>${item.Cidade || ""}</td>
+                    <td>${item.Profissao || ""}</td>
+                </tr>
+            `).join("");
+        }
+
+        async function pesquisar() {
+            const termo = campoBusca.value.trim().toLowerCase();
+            await carregarPlanilha();
+
+            if (!dadosPlanilha.length) {
+                renderizarResultados([]);
+                return;
+            }
+
+            if (!termo) {
+                renderizarResultados(dadosPlanilha);
+                statusBusca.textContent = `Exibindo todos os ${dadosPlanilha.length} registros da planilha.`;
+                return;
+            }
+
+            const filtrados = dadosPlanilha.filter((item) => {
+                return [item.Nome, item.CPF, item.Email, item.Cidade, item.Profissao]
+                    .join(" ")
+                    .toLowerCase()
+                    .includes(termo);
+            });
+
+            renderizarResultados(filtrados);
+            statusBusca.textContent = `Encontrado(s) ${filtrados.length} registro(s) para "${campoBusca.value.trim()}".`;
+        }
+
+        botaoBuscar.addEventListener("click", pesquisar);
+        campoBusca.addEventListener("keydown", (evento) => {
+            if (evento.key === "Enter") {
+                pesquisar();
+            }
+        });
+
+        botaoEscolherPlanilha.addEventListener("click", () => {
+            inputPlanilha.click();
+        });
+
+        inputPlanilha.addEventListener("change", async () => {
+            if (!inputPlanilha.files || !inputPlanilha.files[0]) {
+                planilhaSelecionada = null;
+                nomePlanilha.textContent = "Usando arquivo padrao: dados-consulta.xlsx";
+                dadosPlanilha = [];
+                return;
+            }
+
+            planilhaSelecionada = inputPlanilha.files[0];
+            nomePlanilha.textContent = `Planilha selecionada: ${planilhaSelecionada.name}`;
+            dadosPlanilha = [];
+            await carregarPlanilha();
+        });
+    </script>
+</body>
+</html>
